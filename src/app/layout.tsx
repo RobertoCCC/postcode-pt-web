@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
