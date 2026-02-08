@@ -7,32 +7,32 @@
 [![Tailwind](https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Frontend para a API [postcode-pt](https://github.com/RobertoCCC/postcode-pt) — pesquisa códigos postais portugueses (CP4-CP3) e explora a hierarquia distrito → concelho → localidade.
+Frontend for the [postcode-pt](https://github.com/RobertoCCC/postcode-pt) API — search Portuguese postal codes (CP4-CP3) and browse the district → municipality → locality hierarchy.
 
-**Demo ao vivo:** https://postcode-pt-web.vercel.app
+**Live demo:** https://postcode-pt-web.vercel.app
 
-## Funcionalidades
+## Features
 
-- **Pesquisa de código postal** — introduz 7 dígitos (com ou sem hífen) e vê todas as entradas associadas, incluindo arruamento, localidade, concelho e distrito.
-- **Browser de distritos** — lista dos 29 distritos portugueses com drill-down para os concelhos de cada um.
-- **Dark mode** — alternância claro/escuro/sistema persistida via `next-themes`.
-- **Mobile-first responsivo** — layouts adaptados a telemóvel, tablet e desktop.
-- **Server Components + cache** — fetches no servidor com revalidate de 1 dia para dados estáticos.
+- **Postal code search** — type 7 digits (with or without the hyphen) and get every entry for that code, including street, locality, municipality and district.
+- **District browser** — list of all 29 Portuguese districts with drill-down to each district's municipalities.
+- **Dark mode** — light / dark / system toggle persisted via `next-themes`.
+- **Mobile-first responsive** — layouts adapted for phone, tablet and desktop.
+- **Server Components + cache** — data fetched on the server with a 1-day revalidate for static endpoints.
 
 ## Stack
 
-| Camada | Tecnologia |
-| --- | --- |
-| Framework | Next.js 16 (App Router, Turbopack, Server Components) |
-| Linguagem | TypeScript 5 (strict) |
-| Estilos | Tailwind CSS 4 |
-| Componentes | shadcn/ui (Base UI) |
-| Temas | next-themes |
-| Lint | ESLint 9 |
-| Deploy | Vercel |
-| CI | GitHub Actions |
+| Layer      | Technology                                                  |
+| ---------- | ----------------------------------------------------------- |
+| Framework  | Next.js 16 (App Router, Turbopack, Server Components)       |
+| Language   | TypeScript 5 (strict)                                       |
+| Styling    | Tailwind CSS 4                                              |
+| Components | shadcn/ui (Base UI)                                         |
+| Theming    | next-themes                                                 |
+| Linting    | ESLint 9                                                    |
+| Hosting    | Vercel                                                      |
+| CI         | GitHub Actions                                              |
 
-## Estrutura
+## Project structure
 
 ```
 src/
@@ -40,32 +40,32 @@ src/
 │   ├── layout.tsx                # Root layout + ThemeProvider + SiteHeader
 │   ├── page.tsx                  # Home: search form + districts link
 │   ├── districts/
-│   │   ├── page.tsx              # Lista dos 29 distritos
-│   │   └── [code]/page.tsx       # Distrito + concelhos
+│   │   ├── page.tsx              # List of the 29 districts
+│   │   └── [code]/page.tsx       # District + municipalities
 │   └── postal-codes/
 │       └── [code]/
-│           ├── page.tsx          # Detalhes do código postal
-│           └── not-found.tsx     # Mensagem para CP inválido/inexistente
+│           ├── page.tsx          # Postal code details
+│           └── not-found.tsx     # Message for invalid / missing codes
 ├── components/
-│   ├── site-header.tsx           # Header com nav + theme toggle
-│   ├── theme-provider.tsx        # Wrapper next-themes
-│   ├── theme-toggle.tsx          # Dropdown claro/escuro/sistema
-│   ├── search-form.tsx           # Client form com validação CP4-CP3
+│   ├── site-header.tsx           # Header with nav + theme toggle
+│   ├── theme-provider.tsx        # next-themes wrapper
+│   ├── theme-toggle.tsx          # Light / dark / system dropdown
+│   ├── search-form.tsx           # Client form with CP4-CP3 validation
 │   └── ui/                       # shadcn primitives
 └── lib/
-    └── api.ts                    # Cliente tipado + helpers de normalização
+    └── api.ts                    # Typed client + normalization helpers
 ```
 
-## Desenvolvimento
+## Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abre http://localhost:3000.
+Then open http://localhost:3000.
 
-A app consome `https://postcode-pt.onrender.com/v1` por defeito. Para apontar a um backend local, cria `.env.local`:
+The app consumes `https://postcode-pt.onrender.com/v1` by default. To point at a local backend, create `.env.local`:
 
 ```bash
 NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/v1
@@ -73,26 +73,26 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/v1
 
 ## Scripts
 
-| Comando | Descrição |
-| --- | --- |
-| `npm run dev` | Servidor de desenvolvimento (Turbopack) |
-| `npm run build` | Build de produção |
-| `npm run start` | Servir build de produção |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | Verificação de tipos (`tsc --noEmit`) |
+| Command             | Description                              |
+| ------------------- | ---------------------------------------- |
+| `npm run dev`       | Development server (Turbopack)           |
+| `npm run build`     | Production build                         |
+| `npm run start`     | Serve the production build               |
+| `npm run lint`      | ESLint                                   |
+| `npm run typecheck` | Type-check (`tsc --noEmit`)              |
 
 ## CI/CD
 
-Cada push para `main` e cada PR despoletam GitHub Actions com `lint`, `typecheck` e `build`. A Vercel reage também a cada push em `main` e publica automaticamente em https://postcode-pt-web.vercel.app.
+Every push to `main` and every PR runs GitHub Actions with `lint`, `typecheck` and `build`. Vercel also reacts to every push on `main` and publishes automatically to https://postcode-pt-web.vercel.app.
 
 ## Roadmap
 
-- [ ] Histórico de pesquisas (localStorage)
-- [ ] Página de cada concelho com lista de localidades
-- [ ] Sugestões/autocomplete de localidades a partir do nome
-- [ ] Sitemap.xml + OpenGraph images dinâmicos
-- [ ] Testes E2E (Playwright)
+- [ ] Search history (localStorage)
+- [ ] Per-municipality page with the list of localities
+- [ ] Locality name suggestions / autocomplete
+- [ ] Sitemap.xml + dynamic OpenGraph images
+- [ ] E2E tests (Playwright)
 
-## Licença
+## License
 
 [MIT](LICENSE)
