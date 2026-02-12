@@ -85,6 +85,11 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/v1
 
 Every push to `main` and every PR runs GitHub Actions with `lint`, `typecheck` and `build`. Vercel also reacts to every push on `main` and publishes automatically to https://postcode-pt-web.vercel.app.
 
+## Related projects
+
+- [postcode-pt](https://github.com/RobertoCCC/postcode-pt) — FastAPI service that powers this frontend
+- [postcode-pt-cli](https://github.com/RobertoCCC/postcode-pt-cli) — Go CLI for the same API (`pcpt 1100-038`)
+
 ## Roadmap
 
 - [ ] Search history (localStorage)
